@@ -8,8 +8,8 @@ namespace ElasticSearchClient.Repository.Base
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private ElasticClient _elasticClient;
-        protected string _indexName { get; set; }
+        private readonly ElasticClient _elasticClient;
+        private readonly string _indexName;
 
         public BaseRepository(string indexName)
         {

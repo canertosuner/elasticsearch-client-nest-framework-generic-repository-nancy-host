@@ -14,3 +14,19 @@ C:\Users\caner.tosuner\Documents\Visual Studio 2017\Projects\ElasticSearchClient
 C:\Users\caner.tosuner\Documents\Visual Studio 2017\Projects\ElasticSearchClient\ElasticSearchClient\obj\Debug\ElasticSearchClient.exe
 C:\Users\caner.tosuner\Documents\Visual Studio 2017\Projects\ElasticSearchClient\ElasticSearchClient\obj\Debug\ElasticSearchClient.pdb
 C:\Users\caner.tosuner\Documents\Visual Studio 2017\Projects\ElasticSearchClient\ElasticSearchClient\obj\Debug\ElasticSearchClient.csprojResolveAssemblyReference.cache
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\ElasticSearchClient.exe.config
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\obj\Debug\ElasticSearchClient.exe
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\obj\Debug\ElasticSearchClient.pdb
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\ElasticSearchClient.exe
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\ElasticSearchClient.pdb
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Elasticsearch.Net.dll
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Nancy.dll
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Nancy.Hosting.Self.dll
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Nest.dll
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Elasticsearch.Net.xml
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Nancy.xml
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Nancy.Hosting.Self.xml
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Nest.xml
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\caner.tosuner\Documents\SourceTree\EsClientGenericRepo\ElasticSearchClient\ElasticSearchClient\obj\Debug\ElasticSearchClient.csprojResolveAssemblyReference.cache

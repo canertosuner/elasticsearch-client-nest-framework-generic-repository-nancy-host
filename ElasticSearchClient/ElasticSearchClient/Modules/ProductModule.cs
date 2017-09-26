@@ -3,7 +3,7 @@ using ElasticSearchClient.Service;
 using Nancy;
 using Nancy.ModelBinding;
 
-namespace ElasticSearchClient
+namespace ElasticSearchClient.Modules
 {
     public class ProductModule : NancyModule
     {
