@@ -1,8 +1,5 @@
 ﻿using ElasticSearchClient.Models;
 using ElasticSearchClient.Repository.Base;
-using Nest;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 
 namespace ElasticSearchClient.Repository

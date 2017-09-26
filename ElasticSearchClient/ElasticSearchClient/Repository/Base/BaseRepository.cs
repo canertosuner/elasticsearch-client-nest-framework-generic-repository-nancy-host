@@ -30,13 +30,17 @@ namespace ElasticSearchClient.Repository.Base
         public bool Delete(Guid id)
         {
             var result = _elasticClient.Delete<T>(id.ToString(), idx => idx.Index(_indexName));
+            if (!result.Found)
+            {
+                throw new Exception("Delete operation is not completed for the product : " + id);
+            }
             return result.Found;
         }
 
         public T Get(Guid id)
         {
             var result = _elasticClient.Get<T>(id.ToString(), idx => idx.Index(_indexName));
-            if (!result.IsValid)
+            if (!result.Found)
             {
                 throw new Exception("Get operation is not completed !");
             }

@@ -1,11 +1,12 @@
-﻿using ElasticSearchClient.Models;
+﻿using System;
+using ElasticSearchClient.Models;
 using ElasticSearchClient.Repository;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ElasticSearchClient.Service
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private readonly ProductRepository _productRepository;
 
@@ -29,6 +30,16 @@ namespace ElasticSearchClient.Service
         {
             _productRepository.Update(reqModel.Product);
             return _productRepository.Get(reqModel.Product.Id);
+        }
+
+        public List<Product> GetAll()
+        {
+            return _productRepository.All().ToList();
+        }
+
+        public bool Delete(Guid productId)
+        {
+            return _productRepository.Delete(productId);
         }
     }
 }

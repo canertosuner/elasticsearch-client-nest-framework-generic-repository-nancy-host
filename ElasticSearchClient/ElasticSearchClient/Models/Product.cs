@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ElasticSearchClient.Models
+﻿namespace ElasticSearchClient.Models
 {
     public class Product : BaseEntity
     {
