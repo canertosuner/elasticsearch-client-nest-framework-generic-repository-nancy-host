@@ -49,6 +49,8 @@ namespace ElasticSearchClient.Repository.Base
 
         public void Save(T entity)
         {
+            CheckIndex();
+
             entity.Id = Guid.NewGuid();
             var result = _elasticClient.Index(entity, idx => idx.Index(_indexName));
             if (!result.IsValid)
@@ -78,6 +80,17 @@ namespace ElasticSearchClient.Repository.Base
                 throw new Exception("Search operation is not completed !");
             }
             return result.Documents;
+        }
+
+        private void CheckIndex()
+        {
+            var response = _elasticClient.IndexExists(_indexName);
+            if (!response.Exists)
+            {
+                _elasticClient.CreateIndex(_indexName, index =>
+                   index.Mappings(ms =>
+                       ms.Map<T>(x => x.AutoMap())));
+            }
         }
     }
 }
