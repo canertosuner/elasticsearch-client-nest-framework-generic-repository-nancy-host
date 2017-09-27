@@ -62,6 +62,7 @@
     <Compile Include="Repository\Base\IBaseRepository.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Modules\ProductModule.cs" />
+    <Compile Include="Repository\IProductRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Service\IProductService.cs" />
     <Compile Include="Service\ProductService.cs" />

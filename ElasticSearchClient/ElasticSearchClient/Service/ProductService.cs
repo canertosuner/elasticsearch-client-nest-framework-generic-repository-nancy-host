@@ -8,7 +8,7 @@ namespace ElasticSearchClient.Service
 {
     public class ProductService : IProductService
     {
-        private readonly ProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductService()
         {
@@ -22,7 +22,7 @@ namespace ElasticSearchClient.Service
 
         public Product Save(SaveProductRequest reqModel)
         {
-            var id = _productRepository.Save(reqModel.Product);
+            _productRepository.Save(reqModel.Product);
             return _productRepository.Get(reqModel.Product.Id);
         }
 

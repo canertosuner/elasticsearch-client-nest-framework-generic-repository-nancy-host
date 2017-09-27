@@ -47,15 +47,14 @@ namespace ElasticSearchClient.Repository.Base
             return result.Source;
         }
 
-        public string Save(T document)
+        public void Save(T entity)
         {
-            document.Id = Guid.NewGuid();
-            var result = _elasticClient.Index(document, idx => idx.Index(_indexName));
+            entity.Id = Guid.NewGuid();
+            var result = _elasticClient.Index(entity, idx => idx.Index(_indexName));
             if (!result.IsValid)
             {
                 throw new Exception("Save operation is not completed !");
             }
-            return result.Id;
         }
 
         public void Update(T entity)

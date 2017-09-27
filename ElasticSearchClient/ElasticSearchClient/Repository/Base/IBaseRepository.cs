@@ -5,7 +5,7 @@ namespace ElasticSearchClient.Repository.Base
 {
     public interface IBaseRepository<T> where T : class
     {
-        string Save(T entity);
+        void Save(T entity);
         T Get(Guid id);
         void Update(T entity);
         bool Delete(Guid id);

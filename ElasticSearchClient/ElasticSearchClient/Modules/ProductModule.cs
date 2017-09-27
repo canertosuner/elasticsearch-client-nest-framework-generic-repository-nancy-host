@@ -7,42 +7,40 @@ namespace ElasticSearchClient.Modules
 {
     public class ProductModule : NancyModule
     {
-        private readonly IProductService _productService;
-
         public ProductModule()
         {
-            _productService = new ProductService();
+            IProductService productService = new ProductService();
 
             Post["/product/search"] = parameters =>
             {
                 var request = this.Bind<SearchProductRequest>();
 
-                return _productService.Search(request);
+                return productService.Search(request);
             };
 
             Post["/product/save"] = parameters =>
             {
                 var request = this.Bind<SaveProductRequest>();
 
-                return _productService.Save(request);
+                return productService.Save(request);
             };
 
             Put["/product/update"] = parameters =>
             {
                 var request = this.Bind<UpdateProductRequest>();
 
-                return _productService.Update(request);
+                return productService.Update(request);
             };
 
             Get["/product/all"] = parameters =>
             {
-                return _productService.GetAll();
+                return productService.GetAll();
             };
 
             Delete["/product/delete/{productId}"] = parameters =>
             {
                 var productId = parameters.productId;
-                return _productService.Delete(productId);
+                return productService.Delete(productId);
             };
         }
     }

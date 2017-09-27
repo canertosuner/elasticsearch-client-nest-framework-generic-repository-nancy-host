@@ -4,7 +4,7 @@ using System.Configuration;
 
 namespace ElasticSearchClient.Repository
 {
-    public class ProductRepository : BaseRepository<Product>
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
         public ProductRepository() : base(ConfigurationSettings.AppSettings["ProductIndexName"])
         {
