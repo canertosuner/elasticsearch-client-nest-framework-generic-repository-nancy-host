@@ -11,14 +11,10 @@ namespace ElasticSearchClient.Repository.Base
         private readonly ElasticClient _elasticClient;
         private readonly string _indexName;
 
-        public BaseRepository(string indexName)
+        public BaseRepository(ElasticClient client, string indexName)
         {
+            _elasticClient = client;
             _indexName = indexName;
-            var node = new Uri(ConfigurationSettings.AppSettings["ElasticSearchApiAddress"]);
-
-            var settings = new ConnectionSettings(node);
-
-            _elasticClient = new ElasticClient(settings);
         }
 
         public IEnumerable<T> All()
