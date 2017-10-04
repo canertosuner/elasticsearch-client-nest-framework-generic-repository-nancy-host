@@ -16,9 +16,9 @@ namespace ElasticSearchClient.Service
         public ProductService()
         {
             var indexName = ConfigurationSettings.AppSettings["ElasticSearchIndexName"];
-            var exClient = CreateElasticClient(indexName);
+            var esClient = CreateElasticClient(indexName);
 
-            _productRepository = new ProductRepository(exClient, indexName);
+            _productRepository = new ProductRepository(esClient, indexName);
         }
 
         public List<Product> Search(SearchProductRequest reqModel)
