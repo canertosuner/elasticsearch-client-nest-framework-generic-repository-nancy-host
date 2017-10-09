@@ -2,10 +2,7 @@
 using ElasticSearchClient.Models;
 using ElasticSearchClient.Repository;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using Elasticsearch.Net;
-using Nest;
 
 namespace ElasticSearchClient.Service
 {
@@ -15,15 +12,12 @@ namespace ElasticSearchClient.Service
 
         public ProductService()
         {
-            var indexName = ConfigurationSettings.AppSettings["ElasticSearchIndexName"];
-            var esClient = CreateElasticClient(indexName);
-
-            _productRepository = new ProductRepository(esClient, indexName);
+            _productRepository = new ProductRepository();
         }
 
         public List<Product> Search(SearchProductRequest reqModel)
         {
-            return _productRepository.Search(reqModel.Query).ToList();
+            return _productRepository.Search(reqModel.Product).ToList();
         }
 
         public Product Save(SaveProductRequest reqModel)
@@ -46,14 +40,6 @@ namespace ElasticSearchClient.Service
         public bool Delete(Guid productId)
         {
             return _productRepository.Delete(productId);
-        }
-
-        private static ElasticClient CreateElasticClient(string indexName)
-        {
-            var node = new SingleNodeConnectionPool(new Uri(ConfigurationSettings.AppSettings["ElasticSearchURI"]));
-            var settings = new ConnectionSettings(node);
-            settings.DefaultIndex(indexName + "_defaultindex");
-            return new ElasticClient(settings);
         }
     }
 }

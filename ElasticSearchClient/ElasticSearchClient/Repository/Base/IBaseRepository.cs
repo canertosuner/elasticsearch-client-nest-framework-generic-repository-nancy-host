@@ -10,6 +10,6 @@ namespace ElasticSearchClient.Repository.Base
         void Update(T entity);
         bool Delete(Guid id);
         IEnumerable<T> All();
-        IEnumerable<T> Search(string query);
+        IEnumerable<T> Search(T search);
     }
 }

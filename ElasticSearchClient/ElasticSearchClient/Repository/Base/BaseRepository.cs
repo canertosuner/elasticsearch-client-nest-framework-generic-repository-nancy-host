@@ -3,29 +3,30 @@ using Nest;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Elasticsearch.Net;
 
 namespace ElasticSearchClient.Repository.Base
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly ElasticClient _elasticClient;
-        private readonly string _indexName;
+        protected readonly ElasticClient ElasticClient;
+        protected readonly string IndexName;
 
-        public BaseRepository(ElasticClient client, string indexName)
+        protected BaseRepository(string indexName)
         {
-            _elasticClient = client;
-            _indexName = indexName;
+            ElasticClient = CreateElasticClient();
+            IndexName = indexName;
         }
 
         public IEnumerable<T> All()
         {
-            return _elasticClient.Search<T>(search =>
+            return ElasticClient.Search<T>(search =>
                 search.MatchAll()).Documents;
         }
 
         public bool Delete(Guid id)
         {
-            var result = _elasticClient.Delete<T>(id.ToString(), idx => idx.Index(_indexName));
+            var result = ElasticClient.Delete<T>(id.ToString(), idx => idx.Index(IndexName));
             if (!result.Found)
             {
                 throw new Exception("Delete operation is not completed for the product : " + id);
@@ -35,7 +36,7 @@ namespace ElasticSearchClient.Repository.Base
 
         public T Get(Guid id)
         {
-            var result = _elasticClient.Get<T>(id.ToString(), idx => idx.Index(_indexName));
+            var result = ElasticClient.Get<T>(id.ToString(), idx => idx.Index(IndexName));
             if (!result.Found)
             {
                 throw new Exception("Get operation is not completed !");
@@ -48,7 +49,7 @@ namespace ElasticSearchClient.Repository.Base
             CheckIndex();
 
             entity.Id = Guid.NewGuid();
-            var result = _elasticClient.Index(entity, idx => idx.Index(_indexName));
+            var result = ElasticClient.Index(entity, idx => idx.Index(IndexName));
             if (!result.IsValid)
             {
                 throw new Exception("Save operation is not completed !");
@@ -57,7 +58,7 @@ namespace ElasticSearchClient.Repository.Base
 
         public void Update(T entity)
         {
-            var result = _elasticClient.Update(
+            var result = ElasticClient.Update(
                     new DocumentPath<T>(entity), u =>
                         u.Doc(entity));
             if (!result.IsValid)
@@ -66,27 +67,24 @@ namespace ElasticSearchClient.Repository.Base
             }
         }
 
-        public IEnumerable<T> Search(string search)
-        {
-            var result = _elasticClient.Search<T>(s =>
-                                    s.Query(query =>
-                                    query.QueryString(qs => qs.Query(search))).Index(_indexName));
-            if (!result.IsValid)
-            {
-                throw new Exception("Search operation is not completed !");
-            }
-            return result.Documents;
-        }
+        public abstract IEnumerable<T> Search(T search);
 
         private void CheckIndex()
         {
-            var response = _elasticClient.IndexExists(_indexName);
+            var response = ElasticClient.IndexExists(IndexName);
             if (!response.Exists)
             {
-                _elasticClient.CreateIndex(_indexName, index =>
+                ElasticClient.CreateIndex(IndexName, index =>
                    index.Mappings(ms =>
                        ms.Map<T>(x => x.AutoMap())));
             }
+        }
+
+        private ElasticClient CreateElasticClient()
+        {
+            var node = new SingleNodeConnectionPool(new Uri(ConfigurationSettings.AppSettings["ElasticSearchApiAddress"]));
+            var settings = new ConnectionSettings(node);
+            return new ElasticClient(settings);
         }
     }
 }

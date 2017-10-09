@@ -2,6 +2,6 @@
 {
     public class SearchProductRequest
     {
-        public string Query{ get; set; }
+        public Product Product{ get; set; }
     }
 }
