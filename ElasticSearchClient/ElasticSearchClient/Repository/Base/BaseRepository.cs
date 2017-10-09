@@ -60,15 +60,27 @@ namespace ElasticSearchClient.Repository.Base
         {
             var result = ElasticClient.Update(
                     new DocumentPath<T>(entity), u =>
-                        u.Doc(entity));
+                        u.Doc(entity).Index(IndexName));
             if (!result.IsValid)
             {
                 throw new Exception("Update operation is not completed !");
             }
         }
 
-        public abstract IEnumerable<T> Search(T search);
+        public IEnumerable<T> SearchByQuery(string query)
+        {
+            var result = ElasticClient.Search<T>(s =>
+                             s.Query(q =>
+                             q.QueryString(qs => qs.Query(query))).Index(IndexName));
+            if (!result.IsValid)
+            {
+                throw new Exception("Search operation is not completed !");
+            }
+            return result.Documents;
+        }
 
+        public abstract IEnumerable<T> Search(T search);
+        
         private void CheckIndex()
         {
             var response = ElasticClient.IndexExists(IndexName);

@@ -11,5 +11,6 @@ namespace ElasticSearchClient.Repository.Base
         bool Delete(Guid id);
         IEnumerable<T> All();
         IEnumerable<T> Search(T search);
+        IEnumerable<T> SearchByQuery(string query);
     }
 }
