@@ -17,7 +17,7 @@ namespace ElasticSearchClient.Service
 
         public List<Product> Search(SearchProductRequest reqModel)
         {
-            return _productRepository.Search(reqModel.Product).ToList();
+            return _productRepository.Search(reqModel).ToList();
         }
 
         public Product Save(SaveProductRequest reqModel)

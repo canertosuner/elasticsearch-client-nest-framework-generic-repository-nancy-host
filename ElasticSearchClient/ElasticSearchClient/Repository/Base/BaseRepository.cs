@@ -3,6 +3,7 @@ using Nest;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using Elasticsearch.Net;
 
 namespace ElasticSearchClient.Repository.Base
@@ -21,7 +22,7 @@ namespace ElasticSearchClient.Repository.Base
         public IEnumerable<T> All()
         {
             return ElasticClient.Search<T>(search =>
-                search.MatchAll()).Documents;
+                search.MatchAll().Index(IndexName)).Documents;
         }
 
         public bool Delete(Guid id)
@@ -67,19 +68,36 @@ namespace ElasticSearchClient.Repository.Base
             }
         }
 
-        public IEnumerable<T> SearchByQuery(string query)
+        public IEnumerable<T> Search(BaseSearchModel request)
         {
-            var result = ElasticClient.Search<T>(s =>
-                             s.Query(q =>
-                             q.QueryString(qs => qs.Query(query))).Index(IndexName));
-            if (!result.IsValid)
+            var fields = new List<QueryContainer>();
+            foreach (var item in request.Fields)
+            {
+                fields.Add(new TermQuery
+                {
+                    Field = item.Key,
+                    Value = item.Value
+                });
+            }
+
+            var queryContainer = new QueryContainer(new BoolQuery
+            {
+                Must = fields
+            });
+
+            var response = ElasticClient.Search<T>(new SearchRequest(IndexName, typeof(T))
+            {
+                Size = request.Size,
+                From = request.From,
+                Query = (QueryContainer)queryContainer
+            });
+
+            if (!response.IsValid)
             {
                 throw new Exception("Search operation is not completed !");
             }
-            return result.Documents;
+            return response.Documents;
         }
-
-        public abstract IEnumerable<T> Search(T search);
         
         private void CheckIndex()
         {

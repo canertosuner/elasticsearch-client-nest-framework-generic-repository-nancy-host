@@ -1,7 +1,8 @@
-﻿namespace ElasticSearchClient.Models
+﻿
+namespace ElasticSearchClient.Models
 {
-    public class SearchProductRequest
+    public class SearchProductRequest : BaseSearchModel
     {
-        public Product Product{ get; set; }
+
     }
 }

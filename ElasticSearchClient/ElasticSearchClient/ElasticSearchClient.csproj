@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\BaseSearchModel.cs" />
     <Compile Include="Repository\Base\BaseRepository.cs" />
     <Compile Include="Repository\Base\IBaseRepository.cs" />
     <Compile Include="Models\Product.cs" />

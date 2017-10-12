@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ElasticSearchClient.Models;
 
 namespace ElasticSearchClient.Repository.Base
 {
@@ -10,7 +11,6 @@ namespace ElasticSearchClient.Repository.Base
         void Update(T entity);
         bool Delete(Guid id);
         IEnumerable<T> All();
-        IEnumerable<T> Search(T search);
-        IEnumerable<T> SearchByQuery(string query);
+        IEnumerable<T> Search(BaseSearchModel search);
     }
 }
