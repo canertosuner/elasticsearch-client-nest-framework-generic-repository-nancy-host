@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BaseSearchModel.cs" />
+    <Compile Include="Models\Response\SaveProductResponse.cs" />
+    <Compile Include="Models\Response\UpdateProductResponse.cs" />
     <Compile Include="Repository\Base\BaseRepository.cs" />
     <Compile Include="Repository\Base\IBaseRepository.cs" />
     <Compile Include="Models\Product.cs" />
@@ -69,13 +71,14 @@
     <Compile Include="Service\ProductService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\SaveProductRequest.cs" />
-    <Compile Include="Models\SearchProductRequest.cs" />
-    <Compile Include="Models\UpdateProductRequest.cs" />
+    <Compile Include="Models\Request\SaveProductRequest.cs" />
+    <Compile Include="Models\Request\SearchProductRequest.cs" />
+    <Compile Include="Models\Request\UpdateProductRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

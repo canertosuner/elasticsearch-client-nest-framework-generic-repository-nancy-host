@@ -1,4 +1,4 @@
-﻿using ElasticSearchClient.Models;
+﻿using ElasticSearchClient.Models.Request;
 using ElasticSearchClient.Service;
 using Nancy;
 using Nancy.ModelBinding;

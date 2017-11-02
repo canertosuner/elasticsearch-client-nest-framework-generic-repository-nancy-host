@@ -1,5 +1,5 @@
 ﻿
-namespace ElasticSearchClient.Models
+namespace ElasticSearchClient.Models.Request
 {
     public class SaveProductRequest
     {
