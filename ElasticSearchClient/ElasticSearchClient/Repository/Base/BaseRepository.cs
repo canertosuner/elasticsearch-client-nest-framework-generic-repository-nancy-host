@@ -14,7 +14,7 @@ namespace ElasticSearchClient.Repository.Base
 
         protected BaseRepository(string indexName)
         {
-            _elasticClient = CreateElasticClient();
+            _elasticClient = ElasticSearchClientHelper.CreateElasticClient();
             _indexName = indexName;
         }
 
@@ -46,7 +46,7 @@ namespace ElasticSearchClient.Repository.Base
 
         public void Save(T entity)
         {
-            CheckIndex();
+            ElasticSearchClientHelper.CheckIndex<T>(_elasticClient, _indexName);
 
             entity.Id = Guid.NewGuid();
             var result = _elasticClient.Index(entity, idx => idx.Index(_indexName));
@@ -74,7 +74,7 @@ namespace ElasticSearchClient.Repository.Base
             {
                 dynamicQuery.Add(Query<T>.Match(m => m.Field(new Field(item.Key.ToLower())).Query(item.Value)));
             }
-            
+
             var result = _elasticClient.Search<T>(s => s
                                        .From(request.From)
                                        .Size(request.Size)
@@ -89,22 +89,5 @@ namespace ElasticSearchClient.Repository.Base
             return result.Documents;
         }
 
-        private void CheckIndex()
-        {
-            var response = _elasticClient.IndexExists(_indexName);
-            if (!response.Exists)
-            {
-                _elasticClient.CreateIndex(_indexName, index =>
-                   index.Mappings(ms =>
-                       ms.Map<T>(x => x.AutoMap())));
-            }
-        }
-
-        private ElasticClient CreateElasticClient()
-        {
-            var node = new SingleNodeConnectionPool(new Uri(ConfigurationSettings.AppSettings["ElasticSearchApiAddress"]));
-            var settings = new ConnectionSettings(node);
-            return new ElasticClient(settings);
-        }
     }
 }

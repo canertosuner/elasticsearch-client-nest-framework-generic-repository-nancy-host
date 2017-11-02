@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElasticSearchClientHelper.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BaseSearchModel.cs" />
     <Compile Include="Models\Response\SaveProductResponse.cs" />
